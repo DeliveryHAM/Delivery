@@ -5,11 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>System Delivery | Coming Soon</title>
 
-  <!-- 🔹 FAVICON TAGS (Added for browser tabs, bookmarks & mobile) -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/system-delivery-logo.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/system-delivery-logo.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/system-delivery-logo.png">
-  <link rel="manifest" href="/site.webmanifest">
+  <!-- 🔹 FAVICON TAGS (relative paths - image is in same folder as index.html) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="system-delivery-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="system-delivery-logo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="system-delivery-logo.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- 🔹 OPEN GRAPH / WHATSAPP SHARE TAGS -->
+  <!-- ⚠️ REPLACE "yourusername.github.io" WITH YOUR ACTUAL GITHUB PAGES URL OR CUSTOM DOMAIN -->
+  <meta property="og:title" content="System Delivery | Coming Soon" />
+  <meta property="og:description" content="A stronger, smarter, and more reliable delivery system built for speed, automation, performance, and scale. The future starts now." />
+  <meta property="og:image" content="https://yourusername.github.io/system-delivery-logo.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://yourusername.github.io" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="System Delivery" />
+
+  <!-- 🔹 TWITTER CARD TAGS (bonus: helps WhatsApp, Telegram, LinkedIn, etc.) -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="System Delivery | Coming Soon" />
+  <meta name="twitter:description" content="A stronger, smarter, and more reliable delivery system built for speed, automation, performance, and scale." />
+  <meta name="twitter:image" content="https://yourusername.github.io/system-delivery-logo.png" />
 
   <style>
     * {
@@ -427,66 +444,62 @@
       }
     }
 
-@media (max-width: 600px) {
+    @media (max-width: 600px) {
+      header {
+        align-items: center;
+        gap: 18px;
+        flex-direction: column;
+        text-align: center; 
+      }
 
-  header {
-    align-items: center;
-    gap: 18px;
-    flex-direction: column;
-    text-align: center; 
-  }
+      .brand {
+        justify-content: center;
+        width: 100%;
+      }
 
-  .brand {
-    justify-content: center;
-    width: 100%;
-  }
+      .hero {
+        text-align: center; 
+        gap: 30px; 
+      }
 
-  .hero {
-    text-align: center; 
-    gap: 30px; 
-  }
+      .hero-content {
+        margin: 0 auto; 
+      }
 
-  .hero-content {
-    margin: 0 auto; 
-  }
+      .contact-row {
+        justify-content: center; 
+      }
 
-  .contact-row {
-    justify-content: center; 
-  }
+      .power-words,
+      .metric-grid,
+      .countdown {
+        grid-template-columns: 1fr;
+      }
 
-  .power-words,
-  .metric-grid,
-  .countdown {
-    grid-template-columns: 1fr;
-  }
+      .visual {
+        justify-content: center; 
+      }
 
+      .status-pill {
+        font-size: 11px;
+      }
 
+      .dashboard-card {
+        border-radius: 26px;
+        padding: 20px;
+      }
 
-  .visual {
-    justify-content: center; 
-  }
-
-  .status-pill {
-    font-size: 11px;
-  }
-
-  .dashboard-card {
-    border-radius: 26px;
-    padding: 20px;
-  }
-
-  footer {
-    text-align: center; 
-    justify-content: center; 
-  }
-}
+      footer {
+        text-align: center; 
+        justify-content: center; 
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <div class="brand">
-
         <img src="system-delivery-logo.png" alt="System Delivery Logo" />
       </div>
       <div class="status-pill">COMING SOON</div>
@@ -576,7 +589,6 @@
       requestAnimationFrame(update);
     }
 
-
     function updateCountdown() {
       const launchDate = new Date();
       launchDate.setDate(launchDate.getDate() + 60);
@@ -598,7 +610,6 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
-
 
     document.addEventListener("mousemove", (event) => {
       const x = (event.clientX / window.innerWidth - 0.5) * 18;
