@@ -584,55 +584,84 @@
   </div>
 
   <script>
-    function animateNumber(id, target, suffix = "", duration = 1500) {
-      const element = document.getElementById(id);
-      const start = performance.now();
+  function animateNumber(id, target, suffix = "", duration = 1500) {
+    const element = document.getElementById(id);
+    const start = performance.now();
 
-      function update(now) {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const value = Math.floor(eased * target);
-        element.textContent = value.toLocaleString() + suffix;
+    function update(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.floor(eased * target);
+      element.textContent = value.toLocaleString() + suffix;
 
-        if (progress < 1) requestAnimationFrame(update);
+      if (progress < 1) {
+        requestAnimationFrame(update);
       }
-
-      requestAnimationFrame(update);
     }
 
-    function updateCountdown() {
-      const launchDate = new Date();
-      launchDate.setDate(launchDate.getDate() + 60);
-      launchDate.setHours(0, 0, 0, 0);
-      const launchDateTime = launchDate.getTime();
-      const now = new Date().getTime();
-      const distance = Math.max(launchDateTime - now, 0);
+    requestAnimationFrame(update);
+  }
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
+  /*
+   * SET YOUR REAL LAUNCH DATE HERE
+   * Example: August 4, 2026
+   */
+  const launchDateTime = new Date("2026-08-04T00:00:00").getTime();
 
-      document.getElementById("days").textContent = String(days).padStart(2, "0");
-      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
-      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+  function updateCountdown() {
+    const now = Date.now();
+    const distance = Math.max(launchDateTime - now, 0);
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("days").textContent =
+      String(days).padStart(2, "0");
+
+    document.getElementById("hours").textContent =
+      String(hours).padStart(2, "0");
+
+    document.getElementById("minutes").textContent =
+      String(minutes).padStart(2, "0");
+
+    document.getElementById("seconds").textContent =
+      String(seconds).padStart(2, "0");
+
+    if (distance <= 0) {
+      clearInterval(countdownInterval);
+
+      document.getElementById("days").textContent = "00";
+      document.getElementById("hours").textContent = "00";
+      document.getElementById("minutes").textContent = "00";
+      document.getElementById("seconds").textContent = "00";
     }
+  }
 
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+  updateCountdown();
+  const countdownInterval = setInterval(updateCountdown, 1000);
 
-    document.addEventListener("mousemove", (event) => {
-      const x = (event.clientX / window.innerWidth - 0.5) * 18;
-      const y = (event.clientY / window.innerHeight - 0.5) * 18;
-      const card = document.querySelector(".dashboard-card");
-      card.style.transform = `translateY(-8px) rotateX(${-y / 4}deg) rotateY(${x / 4}deg)`;
-    });
+  document.addEventListener("mousemove", (event) => {
+    const x = (event.clientX / window.innerWidth - 0.5) * 18;
+    const y = (event.clientY / window.innerHeight - 0.5) * 18;
 
-    document.addEventListener("mouseleave", () => {
-      const card = document.querySelector(".dashboard-card");
-      card.style.transform = "translateY(0) rotateX(0) rotateY(0)";
-    });
-  </script>
+    const card = document.querySelector(".dashboard-card");
+
+    if (card) {
+      card.style.transform =
+        `translateY(-8px) rotateX(${-y / 4}deg) rotateY(${x / 4}deg)`;
+    }
+  });
+
+  document.addEventListener("mouseleave", () => {
+    const card = document.querySelector(".dashboard-card");
+
+    if (card) {
+      card.style.transform =
+        "translateY(0) rotateX(0) rotateY(0)";
+    }
+  });
+</script>
 </body>
 </html>
